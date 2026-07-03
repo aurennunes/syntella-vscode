@@ -1,0 +1,40 @@
+name: Publish
+
+# Publishes the extension when a version tag (v*) is pushed.
+# Requires repository secrets:
+#   VSCE_PAT  - VS Code Marketplace Personal Access Token (Marketplace > Manage)
+#   OVSX_PAT  - Open VSX token (optional; the Open VSX step is skipped if unset)
+#
+# Tag with the version already bumped in package.json, e.g.:
+#   npm version patch && git push --follow-tags
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch: {}
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - run: npm ci
+
+      - run: npm run build
+
+      - name: Publish to VS Code Marketplace
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
+        run: npx --yes @vscode/vsce publish -p "$VSCE_PAT"
+
+      - name: Publish to Open VSX
+        env:
+          OVSX_PAT: ${{ secrets.OVSX_PAT }}
+        if: ${{ env.OVSX_PAT != '' }}
+        run: npx --yes ovsx publish -p "$OVSX_PAT"
