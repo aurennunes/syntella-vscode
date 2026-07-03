@@ -32,7 +32,9 @@
     "color": "#0D1117",
     "theme": "dark"
   },
-  "activationEvents": [],
+  "activationEvents": [
+    "onLanguage:syntella"
+  ],
   "main": "./dist/extension.js",
   "contributes": {
     "languages": [
