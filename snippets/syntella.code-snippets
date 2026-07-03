@@ -1,0 +1,62 @@
+{
+  "main function": {
+    "prefix": "main",
+    "body": ["func main() {", "\t$0", "}"],
+    "description": "The program entry point"
+  },
+  "function": {
+    "prefix": "func",
+    "body": ["func ${1:name}(${2:params}): ${3:type} {", "\t$0", "}"],
+    "description": "A function declaration"
+  },
+  "struct type": {
+    "prefix": "type",
+    "body": ["type ${1:Name} {", "\t${2:field}: ${3:type},", "}"],
+    "description": "A struct type"
+  },
+  "sum type": {
+    "prefix": "sumtype",
+    "body": ["type ${1:Name} =", "\t| ${2:VariantA}(${3:int})", "\t| ${4:VariantB}"],
+    "description": "A sum type (tagged union)"
+  },
+  "match": {
+    "prefix": "match",
+    "body": ["match ${1:value} {", "\t${2:Pattern} -> $3", "\t_ -> $0", "}"],
+    "description": "A match expression"
+  },
+  "contract": {
+    "prefix": "contract",
+    "body": ["contract ${1:Name} {", "\tfunc ${2:method}()", "}"],
+    "description": "A contract (interface)"
+  },
+  "impl": {
+    "prefix": "impl",
+    "body": ["impl ${1:Contract} for ${2:Type} {", "\tfunc ${3:method}() {", "\t\t$0", "\t}", "}"],
+    "description": "An impl block"
+  },
+  "flow": {
+    "prefix": "flow",
+    "body": ["flow ${1:name}(${2:params}) {", "\t$0", "\tyield", "}"],
+    "description": "A flow declaration"
+  },
+  "for-in": {
+    "prefix": "for",
+    "body": ["for ${1:item} in ${2:iterable} {", "\t$0", "}"],
+    "description": "A for-in loop"
+  },
+  "if": {
+    "prefix": "if",
+    "body": ["if ${1:condition} {", "\t$0", "}"],
+    "description": "An if statement"
+  },
+  "spawn": {
+    "prefix": "spawn",
+    "body": ["spawn {", "\t$0", "}"],
+    "description": "Spawn a goroutine-style task"
+  },
+  "println": {
+    "prefix": "println",
+    "body": ["io.println($0)"],
+    "description": "Print a line to stdout"
+  }
+}

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Syntella falcon mark. Swap this file to change the mascot everywhere. -->
+  <g stroke="#0D1117" stroke-width="1.1" stroke-linejoin="round" stroke-linecap="round">
+    <path fill="#C56A3E" d="M61 19 C75 19 85 29 85 44 C85 59 77 69 62 71 C58 66 55 61 52 59 L46 57 C44 56 43 53 43 50 L21 52 C13 53 12 61 21 62 L34 60 C38 61 41 63 46 62 C42 49 44 30 61 19 Z"/>
+    <circle cx="62" cy="43" r="6.6" fill="#0D1117" stroke="none"/>
+    <circle cx="62" cy="43" r="3" fill="#C56A3E" stroke="none"/>
+    <path fill="#0D1117" stroke="none" d="M58 48 L63.5 48 L60.5 64 L55.5 61 Z"/>
+  </g>
+</svg>

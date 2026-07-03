@@ -1,0 +1,116 @@
+{
+  "name": "syntella",
+  "displayName": "Syntella",
+  "description": "Syntax highlighting and language server support for the Syntella programming language.",
+  "version": "0.1.0",
+  "publisher": "aurennunes",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Snippets",
+    "Formatters"
+  ],
+  "keywords": [
+    "syntella",
+    "syt",
+    "language server",
+    "lsp"
+  ],
+  "icon": "icons/syntella.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aurennunes/syntella-vscode.git"
+  },
+  "homepage": "https://syntella.dev",
+  "bugs": {
+    "url": "https://github.com/aurennunes/syntella/issues"
+  },
+  "galleryBanner": {
+    "color": "#0D1117",
+    "theme": "dark"
+  },
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "syntella",
+        "aliases": [
+          "Syntella",
+          "syt"
+        ],
+        "extensions": [
+          ".syt"
+        ],
+        "configuration": "./language-configuration.json",
+        "icon": {
+          "light": "./icons/syntella.svg",
+          "dark": "./icons/syntella.svg"
+        }
+      }
+    ],
+    "grammars": [
+      {
+        "language": "syntella",
+        "scopeName": "source.syntella",
+        "path": "./syntaxes/syntella.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "syntella",
+        "path": "./snippets/syntella.code-snippets"
+      }
+    ],
+    "commands": [
+      {
+        "command": "syntella.restartServer",
+        "title": "Syntella: Restart Language Server"
+      }
+    ],
+    "configuration": {
+      "title": "Syntella",
+      "properties": {
+        "syntella.server.path": {
+          "type": "string",
+          "default": "syt",
+          "description": "Path to the `syt` binary that provides the language server (via `syt lsp`). Leave as `syt` to use the one on your PATH."
+        },
+        "syntella.server.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable the Syntella language server (diagnostics, hover, go-to-definition, completion, document symbols, formatting)."
+        },
+        "syntella.trace.server": {
+          "type": "string",
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
+          "default": "off",
+          "description": "Trace the communication between VS Code and the Syntella language server."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "build": "esbuild src/extension.ts --bundle --outfile=dist/extension.js --external:vscode --format=cjs --platform=node --minify",
+    "watch": "esbuild src/extension.ts --bundle --outfile=dist/extension.js --external:vscode --format=cjs --platform=node --sourcemap --watch",
+    "compile": "tsc -p ./ --noEmit",
+    "package": "vsce package"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.19.0",
+    "@types/vscode": "^1.75.0",
+    "esbuild": "^0.20.0",
+    "typescript": "^5.4.0"
+  }
+}

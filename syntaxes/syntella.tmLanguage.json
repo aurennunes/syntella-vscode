@@ -1,0 +1,191 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Syntella",
+  "scopeName": "source.syntella",
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#strings" },
+    { "include": "#numbers" },
+    { "include": "#declarations" },
+    { "include": "#keywords" },
+    { "include": "#constants" },
+    { "include": "#types" },
+    { "include": "#functions" },
+    { "include": "#operators" },
+    { "include": "#identifiers" }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.double-slash.syntella",
+          "match": "//.*$"
+        },
+        {
+          "name": "comment.block.syntella",
+          "begin": "/\\*",
+          "end": "\\*/"
+        }
+      ]
+    },
+    "strings": {
+      "name": "string.quoted.double.syntella",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "name": "constant.character.escape.syntella",
+          "match": "\\\\(?:[\"\\\\/nrt0]|u[0-9A-Fa-f]{4})"
+        }
+      ]
+    },
+    "numbers": {
+      "patterns": [
+        {
+          "name": "constant.numeric.float.syntella",
+          "match": "\\b[0-9][0-9_]*\\.[0-9][0-9_]*([eE][+-]?[0-9]+)?\\b"
+        },
+        {
+          "name": "constant.numeric.hex.syntella",
+          "match": "\\b0[xX][0-9A-Fa-f_]+\\b"
+        },
+        {
+          "name": "constant.numeric.integer.syntella",
+          "match": "\\b[0-9][0-9_]*\\b"
+        }
+      ]
+    },
+    "declarations": {
+      "patterns": [
+        {
+          "comment": "func / flow name",
+          "match": "\\b(func|flow)\\s+([A-Za-z_][A-Za-z0-9_]*)",
+          "captures": {
+            "1": { "name": "storage.type.function.syntella" },
+            "2": { "name": "entity.name.function.syntella" }
+          }
+        },
+        {
+          "comment": "type / contract name",
+          "match": "\\b(type|contract)\\s+([A-Za-z_][A-Za-z0-9_]*)",
+          "captures": {
+            "1": { "name": "storage.type.syntella" },
+            "2": { "name": "entity.name.type.syntella" }
+          }
+        },
+        {
+          "comment": "impl Contract for Type",
+          "match": "\\b(impl)\\s+([A-Za-z_][A-Za-z0-9_]*)(?:\\s+(for)\\s+([A-Za-z_][A-Za-z0-9_]*))?",
+          "captures": {
+            "1": { "name": "storage.type.syntella" },
+            "2": { "name": "entity.name.type.syntella" },
+            "3": { "name": "keyword.control.syntella" },
+            "4": { "name": "entity.name.type.syntella" }
+          }
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.syntella",
+          "match": "\\b(if|else|for|while|return|break|continue|match|case|default|select|spawn|defer|yield|in)\\b"
+        },
+        {
+          "name": "storage.type.syntella",
+          "match": "\\b(func|flow|type|contract|impl|use|local)\\b"
+        },
+        {
+          "name": "storage.modifier.syntella",
+          "match": "\\b(let|const)\\b"
+        },
+        {
+          "name": "keyword.control.panic.syntella",
+          "match": "\\b(panic)\\b"
+        }
+      ]
+    },
+    "constants": {
+      "name": "constant.language.syntella",
+      "match": "\\b(true|false|none)\\b"
+    },
+    "types": {
+      "patterns": [
+        {
+          "name": "support.type.primitive.syntella",
+          "match": "\\b(int|float|bool|string|void|any)\\b"
+        },
+        {
+          "name": "support.type.collection.syntella",
+          "match": "\\b(Array|Map|Channel)\\b"
+        },
+        {
+          "comment": "Capitalized identifiers: user types and sum-type variants",
+          "name": "entity.name.type.syntella",
+          "match": "\\b[A-Z][A-Za-z0-9_]*\\b"
+        }
+      ]
+    },
+    "functions": {
+      "patterns": [
+        {
+          "comment": "module.member(...) — highlight the member",
+          "match": "\\b([a-z_][A-Za-z0-9_]*)\\s*\\.\\s*([a-z_][A-Za-z0-9_]*)\\s*(?=\\()",
+          "captures": {
+            "1": { "name": "variable.other.syntella" },
+            "2": { "name": "entity.name.function.call.syntella" }
+          }
+        },
+        {
+          "comment": "bare call foo(...)",
+          "name": "entity.name.function.call.syntella",
+          "match": "\\b[a-z_][A-Za-z0-9_]*\\s*(?=\\()"
+        }
+      ]
+    },
+    "operators": {
+      "patterns": [
+        {
+          "name": "keyword.operator.arrow.syntella",
+          "match": "->|<-"
+        },
+        {
+          "name": "keyword.operator.optional.syntella",
+          "match": "\\?\\?|\\?\\.|\\?"
+        },
+        {
+          "name": "keyword.operator.comparison.syntella",
+          "match": "==|!=|<=|>=|<|>"
+        },
+        {
+          "name": "keyword.operator.logical.syntella",
+          "match": "&&|\\|\\||!"
+        },
+        {
+          "name": "keyword.operator.arithmetic.syntella",
+          "match": "\\+|-|\\*|/|%"
+        },
+        {
+          "name": "keyword.operator.assignment.syntella",
+          "match": "="
+        },
+        {
+          "name": "keyword.operator.other.syntella",
+          "match": "\\||&|\\^|<<|>>|:"
+        }
+      ]
+    },
+    "identifiers": {
+      "patterns": [
+        {
+          "name": "variable.language.self.syntella",
+          "match": "\\bself\\b"
+        },
+        {
+          "name": "variable.other.syntella",
+          "match": "\\b[a-z_][A-Za-z0-9_]*\\b"
+        }
+      ]
+    }
+  }
+}
