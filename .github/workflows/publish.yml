@@ -33,6 +33,15 @@ jobs:
           VSCE_PAT: ${{ secrets.VSCE_PAT }}
         run: npx --yes @vscode/vsce publish -p "$VSCE_PAT"
 
+      # Open VSX requires the publisher namespace to exist before the first
+      # publish. Creating it is a one-time, idempotent step ("|| true" swallows
+      # the "already owned" error on later runs).
+      - name: Ensure Open VSX namespace
+        env:
+          OVSX_PAT: ${{ secrets.OVSX_PAT }}
+        if: ${{ env.OVSX_PAT != '' }}
+        run: npx --yes ovsx create-namespace aurennunes -p "$OVSX_PAT" || true
+
       - name: Publish to Open VSX
         env:
           OVSX_PAT: ${{ secrets.OVSX_PAT }}

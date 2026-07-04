@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.1
+
+- Publishing: create the Open VSX namespace before the first publish so the
+  extension ships to Open VSX as well as the VS Code Marketplace. No code
+  changes to the extension itself.
+
 ## 0.2.0
 
 - Snippets for the desktop GUI (`uiwindow` app skeleton, `uibutton`).
