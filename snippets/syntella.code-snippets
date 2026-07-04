@@ -58,5 +58,28 @@
     "prefix": "println",
     "body": ["io.println($0)"],
     "description": "Print a line to stdout"
+  },
+  "gui window app": {
+    "prefix": "uiwindow",
+    "body": [
+      "use ( io ui )",
+      "",
+      "func main() {",
+      "\tui.openWindow(\"${1:Syntella}\", ${2:640}, ${3:480})",
+      "\twhile !ui.shouldClose() {",
+      "\t\tui.beginFrame()",
+      "\t\tui.clear(20, 22, 28)",
+      "\t\t$0",
+      "\t\tui.endFrame()",
+      "\t}",
+      "\tui.closeWindow()",
+      "}"
+    ],
+    "description": "An immediate-mode desktop app (raylib GUI)"
+  },
+  "gui button": {
+    "prefix": "uibutton",
+    "body": ["if ui.button(${1:x}, ${2:y}, ${3:w}, ${4:h}, \"${5:label}\") {", "\t$0", "}"],
+    "description": "A GUI button click handler"
   }
 }
